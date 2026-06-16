@@ -10,7 +10,7 @@ export default function PublicationsPage() {
       <PageHeader
         eyebrow="Research Output"
         title="Publications"
-        intro="Selected publications from xGI faculty across the initiative's five research areas, including journal articles, conference papers, and books. Filter by research area or faculty author."
+        intro="Selected publications from xGI faculty across the initiative's five research areas, including journal articles, conference papers, and books. Filter by research area."
       />
 
       <section className="container-site py-14 md:py-20">

@@ -20,6 +20,17 @@ export default function ResearchAreaPage({ params }: { params: { slug: string } 
 
   const facultyList = area.facultySlugs.map((s) => facultyBySlug[s]).filter(Boolean);
 
+  // Flatten every faculty group's publications into one list, then shuffle so
+  // the highlighted publications aren't grouped or ordered by faculty.
+  const shuffledPublications = area.publicationGroups.flatMap((g) => g.items);
+  for (let i = shuffledPublications.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffledPublications[i], shuffledPublications[j]] = [
+      shuffledPublications[j],
+      shuffledPublications[i],
+    ];
+  }
+
   // Other areas for inter-area navigation
   const others = researchAreas.filter((a) => a.slug !== area.slug);
 
@@ -52,9 +63,9 @@ export default function ResearchAreaPage({ params }: { params: { slug: string } 
       {/* Faculty */}
       <section className="bg-wolfgray-50 border-y border-wolfgray-200">
         <div className="container-site py-14 md:py-16">
-          <p className="label-red mb-2">Faculty</p>
+          <p className="label-red mb-2">Affiliated Faculties</p>
           <h2 className="font-display font-extrabold text-3xl mb-8">
-            Researchers in this area
+            Affiliated Faculties
           </h2>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {facultyList.map((f) => (
@@ -69,32 +80,22 @@ export default function ResearchAreaPage({ params }: { params: { slug: string } 
         <div className="flex flex-wrap items-end justify-between gap-4 mb-8">
           <div>
             <p className="label-red mb-2">Highlighted Publications</p>
-            <h2 className="font-display font-extrabold text-3xl">Selected work</h2>
           </div>
           <Link href="/publications" className="link-red text-sm">
             Browse all publications <Arrow />
           </Link>
         </div>
 
-        <div className="space-y-10">
-          {area.publicationGroups.map((group) => (
-            <div key={group.faculty}>
-              <h3 className="font-display font-bold text-xl border-l-4 border-wolfred pl-3 mb-4">
-                {group.faculty}
-              </h3>
-              <ul className="space-y-3">
-                {group.items.map((pub, i) => (
-                  <li
-                    key={i}
-                    className="card p-4 text-sm leading-relaxed text-ink/90 border-l-2 border-l-wolfred/0 hover:border-l-wolfred"
-                  >
-                    {pub}
-                  </li>
-                ))}
-              </ul>
-            </div>
+        <ul className="space-y-3">
+          {shuffledPublications.map((pub, i) => (
+            <li
+              key={i}
+              className="card p-4 text-sm leading-relaxed text-ink/90 border-l-2 border-l-wolfred/0 hover:border-l-wolfred"
+            >
+              {pub}
+            </li>
           ))}
-        </div>
+        </ul>
       </section>
 
       {/* Explore other areas */}

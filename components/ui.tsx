@@ -90,6 +90,11 @@ export function FacultyCard({ f }: { f: Faculty }) {
         )}
       </div>
       <div className="flex flex-1 flex-col p-4">
+        {f.leadership && (
+          <p className="text-xs font-sans font-bold uppercase tracking-wide text-wolfred mb-1">
+            {f.leadership}
+          </p>
+        )}
         <h3 className="font-display text-lg font-bold leading-tight">{f.name}</h3>
         <p className="text-sm text-ink/80 mt-0.5">{f.title}</p>
         <p className="text-xs text-wolfgray-500">{f.department}</p>
