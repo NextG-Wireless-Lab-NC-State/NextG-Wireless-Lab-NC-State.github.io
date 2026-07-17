@@ -6,7 +6,7 @@ const FOOTER_NAV = [
   { href: "/facilities-testbeds", label: "Facilities & Testbeds" },
   { href: "/people", label: "People" },
   { href: "/industry-affiliates", label: "Industry Affiliates" },
-  { href: "/news", label: "News" },
+  // { href: "/news", label: "News" }, — hidden for the time being
   { href: "/events", label: "Events" },
 ];
 

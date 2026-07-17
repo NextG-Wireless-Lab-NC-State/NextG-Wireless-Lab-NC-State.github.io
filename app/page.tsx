@@ -128,7 +128,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 5. News preview */}
+      {/* 5. News preview — hidden for the time being */}
+      {false && (
       <section className="bg-ncolive text-white">
         <div className="container-site py-20 md:py-24">
           <Reveal className="flex flex-wrap items-end justify-between gap-4 mb-10">
@@ -168,6 +169,7 @@ export default function HomePage() {
           </p>
         </div>
       </section>
+      )}
 
       {/* 6. Upcoming events preview */}
       <section className="bg-ncnavy text-white">
