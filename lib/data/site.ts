@@ -83,26 +83,21 @@ export type EventItem = {
   topic: string;
   placeholder: boolean;
   past?: boolean;
+  url?: string;
+  image?: string; // path under /public, shown darkened behind the date
 };
 
 export const events: EventItem[] = [
   {
-    id: 1,
-    title: "Upcoming event 1 — title placeholder",
-    date: "Date placeholder",
-    location: "NC State University",
-    speaker: "Speaker placeholder",
-    topic: "Topic placeholder",
-    placeholder: true,
-  },
-  {
-    id: 2,
-    title: "Upcoming event 2 — title placeholder",
-    date: "Date placeholder",
-    location: "NC State University",
-    speaker: "Speaker placeholder",
-    topic: "Topic placeholder",
-    placeholder: true,
+    id: 3,
+    title: "OAI Foundation Hands-on Workshop at NC State",
+    date: "Oct 13–14, 2026",
+    location: "Hunt Library, NC State",
+    speaker: "OpenAirInterface (OAI) Foundation",
+    topic: "Hands-on with the OAI software stack — RAN, Core Network & OAM",
+    placeholder: false,
+    url: "https://www.eventbrite.fr/e/oai-foundation-hands-on-workshop-at-north-carolina-state-university-tickets-1994152101617?aff=oddtdtcreator",
+    image: "/events/oai-workshop.webp",
   },
 ];
 

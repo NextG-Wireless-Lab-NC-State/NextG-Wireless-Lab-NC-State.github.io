@@ -45,10 +45,6 @@ export default function EventsPage() {
           )}
         </div>
       </section>
-
-      <p className="container-site py-8 text-xs text-wolfgray-500 italic">
-        Event details are placeholders — to be replaced with final event information.
-      </p>
     </>
   );
 }
@@ -56,10 +52,24 @@ export default function EventsPage() {
 function EventRow({ ev, past }: { ev: (typeof events)[number]; past?: boolean }) {
   return (
     <article className="card flex flex-col md:flex-row overflow-hidden">
-      <div className="bg-ink text-white p-6 md:w-56 shrink-0 flex flex-col justify-center">
-        <span className="label-red !text-wolfred">{past ? "Past Event" : "Upcoming"}</span>
-        <span className="mt-1 font-display font-bold text-xl">{ev.date}</span>
-        <span className="text-sm text-wolfgray-300 mt-1">{ev.location}</span>
+      <div className="relative overflow-hidden bg-ink text-white p-6 md:w-56 shrink-0 flex flex-col justify-center">
+        {ev.image && (
+          <>
+            <span
+              className="absolute inset-0 bg-cover bg-center"
+              style={{ backgroundImage: `url(${ev.image})` }}
+              aria-hidden
+            />
+            <span className="absolute inset-0 bg-ink/60" aria-hidden />
+            <span className="absolute top-2 left-2 z-10 flex flex-col justify-center bg-wolfred px-2 py-1.5 leading-none text-white shadow-sm">
+              <span className="font-sans text-xs font-extrabold tracking-tight">NC STATE</span>
+              <span className="mt-0.5 font-sans text-[8px] font-light tracking-[0.14em]">UNIVERSITY</span>
+            </span>
+          </>
+        )}
+        <span className="relative label-red !text-wolfred">{past ? "Past Event" : "Upcoming"}</span>
+        <span className="relative mt-1 font-display font-bold text-xl">{ev.date}</span>
+        <span className="relative text-sm text-wolfgray-300 mt-1">{ev.location}</span>
       </div>
       <div className="p-6 flex flex-1 flex-col">
         <h3 className="font-display font-bold text-xl leading-snug">{ev.title}</h3>
@@ -75,10 +85,18 @@ function EventRow({ ev, past }: { ev: (typeof events)[number]; past?: boolean })
         </dl>
         {!past && (
           <div className="mt-auto pt-5 flex flex-wrap gap-3">
-            <a href={`mailto:${CONTACT_EMAIL}`} className="btn-primary !py-2 !px-4 text-xs">
+            <a
+              href={ev.url ?? `mailto:${CONTACT_EMAIL}`}
+              {...(ev.url ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+              className="btn-primary !py-2 !px-4 text-xs"
+            >
               Register
             </a>
-            <a href={`mailto:${CONTACT_EMAIL}`} className="btn-outline !py-2 !px-4 text-xs">
+            <a
+              href={ev.url ?? `mailto:${CONTACT_EMAIL}`}
+              {...(ev.url ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+              className="btn-outline !py-2 !px-4 text-xs"
+            >
               Event Details <Arrow />
             </a>
           </div>

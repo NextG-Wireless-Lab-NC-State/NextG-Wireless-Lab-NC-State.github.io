@@ -193,31 +193,65 @@ export default function HomePage() {
             {events.map((ev, i) => (
               <Reveal key={ev.id} delay={i * 80} className="h-full">
                 <article className="card flex h-full flex-col sm:flex-row overflow-hidden">
-                  <div className="bg-ink text-white p-5 sm:w-40 shrink-0 flex flex-col justify-center">
-                    <span className="label-red !text-wolfred before:hidden">Event</span>
-                    <span className="mt-1 font-display font-bold text-lg">{ev.date}</span>
-                    <span className="text-xs text-wolfgray-300 mt-1">{ev.location}</span>
+                  <div className="relative overflow-hidden bg-ink text-white p-5 sm:w-40 shrink-0 flex flex-col justify-center">
+                    {ev.image && (
+                      <>
+                        <span
+                          className="absolute inset-0 bg-cover bg-center"
+                          style={{ backgroundImage: `url(${ev.image})` }}
+                          aria-hidden
+                        />
+                        <span className="absolute inset-0 bg-ink/60" aria-hidden />
+                        <span className="absolute top-2 left-2 z-10 flex flex-col justify-center bg-wolfred px-1.5 py-1 leading-none text-white shadow-sm">
+                          <span className="font-sans text-[11px] font-extrabold tracking-tight">NC STATE</span>
+                          <span className="mt-0.5 font-sans text-[7px] font-light tracking-[0.14em]">UNIVERSITY</span>
+                        </span>
+                      </>
+                    )}
+                    <span className="relative label-red !text-wolfred before:hidden">Event</span>
+                    <span className="relative mt-1 font-display font-bold text-lg">{ev.date}</span>
+                    <span className="relative text-xs text-wolfgray-300 mt-1">{ev.location}</span>
                   </div>
                   <div className="p-5 flex flex-1 flex-col">
                     <h3 className="font-display font-bold text-lg leading-snug">{ev.title}</h3>
                     <p className="text-sm text-wolfgray-700 mt-1">Speaker: {ev.speaker}</p>
                     <p className="text-sm text-wolfgray-700">Topic: {ev.topic}</p>
                     <div className="mt-auto pt-4 flex gap-3">
-                      <Link href="/events" className="btn-primary !py-2 !px-4 text-xs">
-                        Register
-                      </Link>
-                      <Link href="/events" className="btn-outline !py-2 !px-4 text-xs">
-                        Event Details
-                      </Link>
+                      {ev.url ? (
+                        <>
+                          <a
+                            href={ev.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="btn-primary !py-2 !px-4 text-xs"
+                          >
+                            Register
+                          </a>
+                          <a
+                            href={ev.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="btn-outline !py-2 !px-4 text-xs"
+                          >
+                            Event Details
+                          </a>
+                        </>
+                      ) : (
+                        <>
+                          <Link href="/events" className="btn-primary !py-2 !px-4 text-xs">
+                            Register
+                          </Link>
+                          <Link href="/events" className="btn-outline !py-2 !px-4 text-xs">
+                            Event Details
+                          </Link>
+                        </>
+                      )}
                     </div>
                   </div>
                 </article>
               </Reveal>
             ))}
           </div>
-          <p className="mt-6 text-xs text-white/70 italic">
-            Placeholder events — to be replaced with final event details.
-          </p>
         </div>
       </section>
 
