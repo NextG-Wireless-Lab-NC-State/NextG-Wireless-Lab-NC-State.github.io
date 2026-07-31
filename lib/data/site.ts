@@ -3,15 +3,17 @@
 export type Facility = {
   name: string;
   blurb: string;
-  image?: string; // path under /public, where a photo is available
+  image?: string;
+  url?: string;
 };
 
 export const facilities: Facility[] = [
   {
-    name: "AERPAW Research Platform",
-    blurb:
-      "Advanced wireless research platform for experimentation with aerial and ground wireless systems, used for field trials, propagation studies, and autonomous vehicle network research.",
-    image: "/facilities/aerpaw-drone.jpeg",
+  name: "AERPAW Research Platform",
+  blurb:
+    "Advanced wireless research platform for experimentation with aerial and ground wireless systems, used for field trials, propagation studies, and autonomous vehicle network research.",
+  image: "/facilities/aerpaw-drone.jpeg",
+  url: "https://aerpaw.org/",
   },
   {
     name: "O-RAN Testbed",
