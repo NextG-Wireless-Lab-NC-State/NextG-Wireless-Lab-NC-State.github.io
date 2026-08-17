@@ -314,7 +314,7 @@ function xgi_run_import() {
 
 	// Site identity.
 	if ( 'Just another WordPress site' === get_option( 'blogdescription' ) || ! get_option( 'blogdescription' ) ) {
-		update_option( 'blogdescription', __( 'The Future of Intelligent Wireless Systems', 'xgi' ) );
+		update_option( 'blogdescription', __( 'The Future of Intelligent Wireless Networked Systems', 'xgi' ) );
 	}
 	update_option( 'xgi_imported', time() );
 

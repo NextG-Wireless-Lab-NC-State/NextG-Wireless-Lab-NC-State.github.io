@@ -19,7 +19,7 @@ export type ResearchArea = {
 };
 
 export const researchIntro =
-  "The convergence of AI, communications, and sensing is reshaping wireless systems. xGI leads this transformation through research spanning AI-native networks, integrated sensing and communications, intelligent infrastructure, and autonomous applications.";
+  "The convergence of AI, communications, and sensing is reshaping wireless networked systems. xGI leads this transformation through research spanning AI-native networks, integrated sensing and communications, intelligent infrastructure, and autonomous applications.";
 
 export const researchPositioning =
   "xGI is the convergence of AI, communications, sensing, and autonomous systems for the FutureG era.";
@@ -308,7 +308,7 @@ export const researchAreas: ResearchArea[] = [
       "Quantum signal processing and communications",
     ],
     overview:
-      "xGI advances the physical foundations of future intelligent networks through innovations in communication hardware and system platforms. Research spans EM/antenna design, RF and mixed-signal circuits, phased arrays, metasurfaces, mmWave and THz integrated chip scale platforms, secure wireless physical-layer technologies, and AI-enabled RFIC and RF system design. These technologies provide the high-performance, energy-efficient infrastructure required to support future AI-native wireless systems.",
+      "xGI advances the physical foundations of future intelligent networks through innovations in communication hardware and system platforms. Research spans EM/antenna design, RF and mixed-signal circuits, phased arrays, metasurfaces, mmWave and THz integrated chip scale platforms, secure wireless physical-layer technologies, and AI-enabled RFIC and RF system design. These technologies provide the high-performance, energy-efficient infrastructure required to support future AI-native wireless networked systems.",
     facultySlugs: [
       "suresh-venkatesh",
       "brian-floyd",

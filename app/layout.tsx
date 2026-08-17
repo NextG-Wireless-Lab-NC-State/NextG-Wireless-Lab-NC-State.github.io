@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     template: "%s | xGI Initiative — NC State",
   },
   description:
-    "The xGI Initiative at NC State advances the future of intelligent wireless systems through interdisciplinary research across communications, networking, AI, sensing, hardware, and autonomous applications.",
+    "The xGI Initiative at NC State advances the future of intelligent wireless networked systems through interdisciplinary research across communications, networking, AI, sensing, hardware, and autonomous applications.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

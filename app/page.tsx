@@ -28,7 +28,7 @@ export default function HomePage() {
               className="anim-rise font-display font-extrabold tracking-tight text-5xl md:text-7xl xl:text-[5.4rem] leading-[0.98]"
               style={{ animationDelay: "0.15s" }}
             >
-              The Future of <span className="text-glow-red">Intelligent</span> Wireless Systems
+              The Future of <span className="text-glow-red">Intelligent</span> Wireless Networked Systems
             </h1>
             <p
               className="anim-rise mt-7 max-w-xl text-lg md:text-xl text-white/70 leading-relaxed"

@@ -1,8 +1,8 @@
 {
  "contactEmail": "xgi-contact@ncsu.edu",
- "mission": "The xGI Initiative at NC State advances the future of intelligent wireless systems through interdisciplinary research spanning communications, networking, AI, sensing, hardware, and autonomous applications. By integrating innovations across the wireless stack — from RF platforms and O-RAN architectures to AI-native networks and large-scale testbeds — xGI develops transformative technologies for next-generation communication, sensing, and connected systems. Through strong partnerships with industry and government, xGI accelerates innovation and real-world impact while positioning NC State as a national leader in next-generation technologies.",
+ "mission": "The xGI Initiative at NC State advances the future of intelligent wireless networked systems through interdisciplinary research spanning communications, networking, AI, sensing, hardware, and autonomous applications. By integrating innovations across the wireless stack — from RF platforms and O-RAN architectures to AI-native networks and large-scale testbeds — xGI develops transformative technologies for next-generation communication, sensing, and connected systems. Through strong partnerships with industry and government, xGI accelerates innovation and real-world impact while positioning NC State as a national leader in next-generation technologies.",
  "vision": "xGI envisions a future where communications, sensing, and intelligence are deeply integrated into a unified wireless fabric.",
- "researchIntro": "The convergence of AI, communications, and sensing is reshaping wireless systems. xGI leads this transformation through research spanning AI-native networks, integrated sensing and communications, intelligent infrastructure, and autonomous applications.",
+ "researchIntro": "The convergence of AI, communications, and sensing is reshaping wireless networked systems. xGI leads this transformation through research spanning AI-native networks, integrated sensing and communications, intelligent infrastructure, and autonomous applications.",
  "researchPositioning": "xGI is the convergence of AI, communications, sensing, and autonomous systems for the FutureG era.",
  "researchAreas": [
   {
@@ -284,7 +284,7 @@
     "Wireless PHY",
     "Quantum signal processing and communications"
    ],
-   "overview": "xGI advances the physical foundations of future intelligent networks through innovations in communication hardware and system platforms. Research spans EM/antenna design, RF and mixed-signal circuits, phased arrays, metasurfaces, mmWave and THz integrated chip scale platforms, secure wireless physical-layer technologies, and AI-enabled RFIC and RF system design. These technologies provide the high-performance, energy-efficient infrastructure required to support future AI-native wireless systems.",
+   "overview": "xGI advances the physical foundations of future intelligent networks through innovations in communication hardware and system platforms. Research spans EM/antenna design, RF and mixed-signal circuits, phased arrays, metasurfaces, mmWave and THz integrated chip scale platforms, secure wireless physical-layer technologies, and AI-enabled RFIC and RF system design. These technologies provide the high-performance, energy-efficient infrastructure required to support future AI-native wireless networked systems.",
    "facultySlugs": [
     "suresh-venkatesh",
     "brian-floyd",
@@ -1937,7 +1937,7 @@
  "facilities": [
   {
    "name": "AERPAW Research Platform",
-   "blurb": "Advanced wireless research platform for experimentation with aerial and ground wireless systems, used for field trials, propagation studies, and autonomous vehicle network research.",
+   "blurb": "Advanced wireless research platform for experimentation with aerial and ground wireless networked systems, used for field trials, propagation studies, and autonomous vehicle network research.",
    "image": "/facilities/aerpaw-drone.jpeg",
    "url": "https://aerpaw.org/"
   },

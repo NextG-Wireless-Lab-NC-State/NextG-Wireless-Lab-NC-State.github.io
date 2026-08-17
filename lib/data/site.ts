@@ -11,7 +11,7 @@ export const facilities: Facility[] = [
   {
   name: "AERPAW Research Platform",
   blurb:
-    "Advanced wireless research platform for experimentation with aerial and ground wireless systems, used for field trials, propagation studies, and autonomous vehicle network research.",
+    "Advanced wireless research platform for experimentation with aerial and ground wireless networked systems, used for field trials, propagation studies, and autonomous vehicle network research.",
   image: "/facilities/aerpaw-drone.jpeg",
   url: "https://aerpaw.org/",
   },
@@ -106,7 +106,7 @@ export const events: EventItem[] = [
 export const CONTACT_EMAIL = "xgi-contact@ncsu.edu";
 
 export const MISSION =
-  "The xGI Initiative at NC State advances the future of intelligent wireless systems through interdisciplinary research spanning communications, networking, AI, sensing, hardware, and autonomous applications. By integrating innovations across the wireless stack — from RF platforms and O-RAN architectures to AI-native networks and large-scale testbeds — xGI develops transformative technologies for next-generation communication, sensing, and connected systems. Through strong partnerships with industry and government, xGI accelerates innovation and real-world impact while positioning NC State as a national leader in next-generation technologies.";
+  "The xGI Initiative at NC State advances the future of intelligent wireless networked systems through interdisciplinary research spanning communications, networking, AI, sensing, hardware, and autonomous applications. By integrating innovations across the wireless stack — from RF platforms and O-RAN architectures to AI-native networks and large-scale testbeds — xGI develops transformative technologies for next-generation communication, sensing, and connected systems. Through strong partnerships with industry and government, xGI accelerates innovation and real-world impact while positioning NC State as a national leader in next-generation technologies.";
 
 export const VISION =
   "xGI envisions a future where communications, sensing, and intelligence are deeply integrated into a unified wireless fabric.";
