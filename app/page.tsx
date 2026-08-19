@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { researchAreas } from "@/lib/data/research";
 import { news, events, MISSION, VISION, CONTACT_EMAIL } from "@/lib/data/site";
-import { Arrow, ImagePlaceholder, ReadMore } from "@/components/ui";
+import { Arrow, ReadMore } from "@/components/ui";
 import Reveal from "@/components/Reveal";
 import HeroCarousel from "@/components/HeroCarousel";
+import NewsCard from "@/components/NewsCard";
 
 const HERO_SLIDES = [
   { src: "/home/cover.jpg", alt: "Close-up of an RF / microwave circuit developed at xGI" },
@@ -128,8 +129,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 5. News preview — hidden for the time being */}
-      {false && (
+      {/* 5. News preview */}
       <section className="bg-ncolive text-white">
         <div className="container-site py-20 md:py-24">
           <Reveal className="flex flex-wrap items-end justify-between gap-4 mb-10">
@@ -148,28 +148,15 @@ export default function HomePage() {
           </Reveal>
 
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {news.map((item, i) => (
+            {news.slice(0, 4).map((item, i) => (
               <Reveal key={item.id} delay={i * 70} className="h-full">
-                <article className="card flex h-full flex-col">
-                  <ImagePlaceholder label="News image" className="aspect-[4/3] w-full" />
-                  <div className="p-5 flex flex-1 flex-col">
-                    <span className="text-xs text-wolfgray-500 uppercase tracking-wide">{item.date}</span>
-                    <h3 className="mt-1 font-display font-bold text-lg leading-snug">{item.headline}</h3>
-                    <p className="mt-2 text-sm text-wolfgray-700 flex-1">{item.excerpt}</p>
-                    <span className="link-red mt-4 text-xs">
-                      Read more <Arrow />
-                    </span>
-                  </div>
-                </article>
+                {/* Clamped so one long item does not tower over the rest of the row. */}
+                <NewsCard item={item} clamp />
               </Reveal>
             ))}
           </div>
-          <p className="mt-6 text-xs text-white/70 italic">
-            Placeholder news — to be replaced with final xGI content.
-          </p>
         </div>
       </section>
-      )}
 
       {/* 6. Upcoming events preview */}
       <section className="bg-ncnavy text-white">

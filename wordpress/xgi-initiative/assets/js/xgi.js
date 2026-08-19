@@ -1,12 +1,13 @@
 /**
  * xGI Initiative — front-end behaviour.
  *
- * Four small enhancements, all progressive: the site works without any of them.
+ * Six small enhancements, all progressive: the site works without any of them.
  *   1. Sticky-header shadow on scroll
  *   2. Mobile navigation toggle
  *   3. Hero image crossfade
  *   4. Scroll reveals
- *   5. Publications filtering
+ *   5. News excerpt clamping, with a show more / show less toggle
+ *   6. Publications filtering
  */
 ( function () {
 	'use strict';
@@ -172,7 +173,59 @@
 	}
 
 	/* ---------------------------------------------------------------------
-	 * 5. Publications explorer
+	 * 5. News excerpt clamps
+	 *
+	 * Keeps every card in a row the same height. The clamp is applied here
+	 * rather than in the stylesheet so that without JS the full excerpt is
+	 * still readable.
+	 * ------------------------------------------------------------------ */
+	function initNewsClamps( cards ) {
+		var strings = window.xgiL10n || {};
+		var spare = [];
+		var clamped = 0;
+
+		Array.prototype.forEach.call( cards, function ( card ) {
+			var text = card.querySelector( '.news-card__excerpt' );
+			var toggle = card.querySelector( '.news-card__toggle' );
+
+			if ( ! text || ! toggle ) {
+				return;
+			}
+
+			text.classList.add( 'news-card__excerpt--clamp' );
+
+			// Nothing is hidden, so this card needs no toggle of its own.
+			if ( text.scrollHeight <= text.clientHeight + 1 ) {
+				text.classList.remove( 'news-card__excerpt--clamp' );
+				spare.push( toggle );
+				return;
+			}
+
+			clamped++;
+			toggle.hidden = false;
+
+			toggle.addEventListener( 'click', function () {
+				var expanded = text.classList.toggle( 'is-expanded' );
+
+				toggle.setAttribute( 'aria-expanded', expanded ? 'true' : 'false' );
+				toggle.textContent = expanded
+					? ( strings.showLess || 'Show less' )
+					: ( strings.showMore || 'Show more' );
+			} );
+		} );
+
+		// Keep the row even: where one card gained a toggle, hold the same space
+		// on the cards that did not need one.
+		if ( clamped ) {
+			spare.forEach( function ( toggle ) {
+				toggle.classList.add( 'news-card__toggle--placeholder' );
+				toggle.hidden = false;
+			} );
+		}
+	}
+
+	/* ---------------------------------------------------------------------
+	 * 6. Publications explorer
 	 * ------------------------------------------------------------------ */
 	function initPublications( root ) {
 		var pills = Array.prototype.slice.call( root.querySelectorAll( '.pill' ) );
@@ -271,6 +324,8 @@
 			document.querySelectorAll( '[data-xgi-carousel]' ),
 			initCarousel
 		);
+
+		initNewsClamps( document.querySelectorAll( '[data-xgi-clamp]' ) );
 
 		Array.prototype.forEach.call(
 			document.querySelectorAll( '[data-xgi-publications]' ),

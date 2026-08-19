@@ -23,7 +23,9 @@ export default function PeoplePage() {
         <h2 className="font-display font-extrabold text-3xl md:text-4xl mb-8">
           Initiative Directors
         </h2>
-        <div className="flex flex-col gap-5 max-w-xs">
+        {/* Side by side from 640px up, each keeping the single-column card
+            width (two 20rem cards plus the gap); stacked below that. */}
+        <div className="grid gap-5 max-w-xs sm:grid-cols-2 sm:max-w-[41.25rem]">
           {leadership.map((f) => (
             <FacultyCard key={f.slug} f={f} />
           ))}

@@ -6,7 +6,7 @@ const FOOTER_NAV = [
   { href: "/facilities-testbeds", label: "Facilities & Testbeds" },
   { href: "/people", label: "People" },
   { href: "/industry-affiliates", label: "Industry Affiliates" },
-  // { href: "/news", label: "News" }, — hidden for the time being
+  { href: "/news", label: "News" },
   { href: "/events", label: "Events" },
 ];
 
@@ -26,7 +26,9 @@ export default function Footer() {
             <p className="mt-4 text-sm text-wolfgray-300 leading-relaxed">
               NC State University | xGI Initiative
               <br />
-              Department of Electrical and Computer Engineering (ECE)
+              Department of Electrical and Computer Engineering
+              <br />
+              909 Capability Dr, Raleigh, NC 27606
             </p>
           </div>
 
@@ -66,7 +68,7 @@ export default function Footer() {
       <div className="border-t border-white/10">
         <div className="container-site py-5 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-wolfgray-500">
           <span>© {new Date().getFullYear()} NC State University · xGI Initiative</span>
-          <span>Department of Electrical and Computer Engineering (ECE)</span>
+          <span>Department of Electrical and Computer Engineering</span>
         </div>
       </div>
     </footer>

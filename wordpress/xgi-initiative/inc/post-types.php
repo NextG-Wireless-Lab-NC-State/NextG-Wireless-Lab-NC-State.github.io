@@ -225,6 +225,22 @@ function xgi_field_schema() {
 				),
 			),
 		),
+		'post'            => array(
+			'title'  => __( 'News Details', 'xgi' ),
+			'fields' => array(
+				'xgi_date_label' => array(
+					'label' => __( 'Date label', 'xgi' ),
+					'type'  => 'text',
+					'help'  => __( 'Displayed verbatim above the headline, e.g. "October 2026". Leave blank to show no date.', 'xgi' ),
+				),
+				'xgi_logo'       => array(
+					'label' => __( 'The image is a logo', 'xgi' ),
+					'type'  => 'checkbox',
+					'help'  => __( 'Shows the whole image on a light background rather than cropping it to fill the card.', 'xgi' ),
+				),
+			),
+			'notice' => __( 'The card image is the Featured Image.', 'xgi' ),
+		),
 		'xgi_event'       => array(
 			'title'  => __( 'Event Details', 'xgi' ),
 			'fields' => array(

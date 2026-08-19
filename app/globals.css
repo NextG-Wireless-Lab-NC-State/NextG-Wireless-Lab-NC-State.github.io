@@ -80,6 +80,11 @@
   .card:hover img {
     @apply scale-[1.05];
   }
+  /* Logo marks are fitted inside the slot, so the zoom would push them past
+     their own edges. */
+  .card:hover img.card-logo {
+    @apply scale-100;
+  }
 
   .link-red {
     @apply font-sans font-bold uppercase tracking-wide text-sm text-wolfred inline-flex items-center gap-1 hover:gap-2 transition-all;

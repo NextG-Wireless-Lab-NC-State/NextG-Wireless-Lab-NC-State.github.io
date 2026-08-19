@@ -71,6 +71,8 @@ function xgi_assets() {
 			'publicationPlural'   => __( 'publications', 'xgi' ),
 			'showing'             => __( 'Showing', 'xgi' ),
 			'inArea'              => __( 'in', 'xgi' ),
+			'showMore'            => __( 'Show more', 'xgi' ),
+			'showLess'            => __( 'Show less', 'xgi' ),
 		)
 	);
 }

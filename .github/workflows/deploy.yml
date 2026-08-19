@@ -2,7 +2,9 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main]
+    # main holds the WordPress theme, which Pages cannot serve. This branch
+    # holds the static Next.js build of the same site.
+    branches: [pages]
   workflow_dispatch:
 
 permissions:

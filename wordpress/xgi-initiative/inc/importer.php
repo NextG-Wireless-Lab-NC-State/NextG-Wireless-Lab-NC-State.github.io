@@ -27,8 +27,7 @@ function xgi_page_blueprint() {
 		'facilities-testbeds'  => array( 'Facilities and Testbeds', 'page-templates/facilities.php', 'Facilities & Testbeds' ),
 		'events'               => array( 'Events', 'page-templates/events.php', 'Events' ),
 		'industry-affiliates'  => array( 'Industry Affiliates', 'page-templates/affiliates.php', 'Industry Affiliates' ),
-		// Present but deliberately left out of the navigation, as on the original site.
-		'news'                 => array( 'News and Updates', 'page-templates/news.php', '' ),
+		'news'                 => array( 'News and Updates', 'page-templates/news.php', 'News' ),
 	);
 }
 
@@ -289,27 +288,43 @@ function xgi_run_import() {
 	/* translators: %d: number of events. */
 	$log[] = sprintf( __( '%d events imported.', 'xgi' ), count( $data['events'] ) );
 
-	// News placeholders — published but unlinked, exactly as on the original site.
+	// News. Posts are listed by date on the front end, so stamp them a minute
+	// apart in dataset order — the first item stays the most recent.
 	if ( ! empty( $data['news'] ) ) {
-		foreach ( $data['news'] as $item ) {
-			xgi_upsert_post(
+		if ( xgi_trash_stock_hello_world() ) {
+			$log[] = __( 'WordPress\'s stock "Hello world!" post moved to the trash so it does not appear among the news.', 'xgi' );
+		}
+
+		foreach ( $data['news'] as $i => $item ) {
+			$stamp = gmdate( 'Y-m-d H:i:s', time() - ( (int) $i * MINUTE_IN_SECONDS ) );
+
+			$post_id = xgi_upsert_post(
 				'post',
 				sanitize_title( $item['headline'] ),
 				$item['headline'],
 				array(
-					'post_content' => $item['excerpt'],
-					'post_excerpt' => $item['excerpt'],
+					'post_content'  => $item['excerpt'],
+					'post_excerpt'  => $item['excerpt'],
+					'post_date_gmt' => $stamp,
+					'post_date'     => get_date_from_gmt( $stamp ),
 				),
-				array( 'xgi_date_label' => $item['date'] )
+				array(
+					'xgi_date_label' => isset( $item['date'] ) ? $item['date'] : '',
+					'xgi_logo'       => empty( $item['logo'] ) ? '' : '1',
+				)
 			);
+
+			if ( $post_id && ! empty( $item['image'] ) ) {
+				xgi_attach_image( $post_id, $item['image'], $item['headline'] );
+			}
 		}
-		/* translators: %d: number of news placeholders. */
-		$log[] = sprintf( __( '%d placeholder news posts imported.', 'xgi' ), count( $data['news'] ) );
+		/* translators: %d: number of news posts. */
+		$log[] = sprintf( __( '%d news posts imported.', 'xgi' ), count( $data['news'] ) );
 	}
 
 	// Menus.
-	xgi_build_menu( 'primary', __( 'Primary Menu', 'xgi' ), $pages, array( 'home', 'research', 'publications', 'people', 'facilities-testbeds', 'events', 'industry-affiliates' ) );
-	xgi_build_menu( 'footer', __( 'Footer Menu', 'xgi' ), $pages, array( 'research', 'facilities-testbeds', 'people', 'industry-affiliates', 'events' ) );
+	xgi_build_menu( 'primary', __( 'Primary Menu', 'xgi' ), $pages, array( 'home', 'research', 'publications', 'people', 'facilities-testbeds', 'news', 'events', 'industry-affiliates' ) );
+	xgi_build_menu( 'footer', __( 'Footer Menu', 'xgi' ), $pages, array( 'research', 'facilities-testbeds', 'people', 'industry-affiliates', 'news', 'events' ) );
 	$log[] = __( 'Primary and footer menus built and assigned.', 'xgi' );
 
 	// Site identity.
@@ -362,14 +377,48 @@ function xgi_upsert_page( $slug, $title, $template ) {
 }
 
 /**
- * Create or update a post of any type, matched on slug.
+ * Move WordPress's stock "Hello world!" post to the trash.
+ *
+ * A fresh install ships this post, and once News is on the site it turns up in
+ * the listing and the home page cards. Only the untouched original is trashed —
+ * if anyone has edited it, it is left alone. Trash rather than delete, so the
+ * post can be restored from wp-admin.
+ *
+ * @return bool True when a post was trashed.
+ */
+function xgi_trash_stock_hello_world() {
+	$posts = get_posts(
+		array(
+			'post_type'      => 'post',
+			'name'           => 'hello-world',
+			'post_status'    => 'publish',
+			'posts_per_page' => 1,
+		)
+	);
+
+	if ( ! $posts ) {
+		return false;
+	}
+
+	$post = $posts[0];
+
+	// Never edited since it was created — i.e. still the stock content.
+	if ( $post->post_modified_gmt !== $post->post_date_gmt ) {
+		return false;
+	}
+
+	return (bool) wp_trash_post( $post->ID );
+}
+
+/**
+ * Create or update a post, matched by slug.
  *
  * @param string $post_type Post type.
- * @param string $slug      Slug.
- * @param string $title     Title.
- * @param array  $args      Extra post args.
- * @param array  $meta      Meta key => value.
- * @return int Post ID.
+ * @param string $slug      Post slug.
+ * @param string $title     Post title.
+ * @param array  $args      Extra wp_insert_post args.
+ * @param array  $meta      Meta key => value pairs.
+ * @return int Post ID, or 0 on failure.
  */
 function xgi_upsert_post( $post_type, $slug, $title, $args = array(), $meta = array() ) {
 	$existing = get_posts(

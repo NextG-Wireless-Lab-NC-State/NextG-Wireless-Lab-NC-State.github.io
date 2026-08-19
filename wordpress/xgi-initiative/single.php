@@ -13,7 +13,7 @@ $xgi_label = get_post_meta( get_the_ID(), 'xgi_date_label', true );
 
 xgi_page_hero(
 	array(
-		'eyebrow' => $xgi_label ? $xgi_label : get_the_date(),
+		'eyebrow' => $xgi_label,
 		'title'   => get_the_title(),
 		'intro'   => has_excerpt() ? get_the_excerpt() : '',
 	)

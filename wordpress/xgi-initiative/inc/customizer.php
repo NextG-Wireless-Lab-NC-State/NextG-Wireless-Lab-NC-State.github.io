@@ -101,7 +101,9 @@ function xgi_customize_register( $wp_customize ) {
 
 	$add( 'university', 'xgi_identity', __( 'University name', 'xgi' ) );
 	$add( 'initiative', 'xgi_identity', __( 'Initiative name', 'xgi' ) );
-	$add( 'department', 'xgi_identity', __( 'Department line', 'xgi' ) );
+	$add( 'department', 'xgi_identity', __( 'Department line — header', 'xgi' ) );
+	$add( 'department_footer', 'xgi_identity', __( 'Department line — footer', 'xgi' ) );
+	$add( 'address', 'xgi_identity', __( 'Street address', 'xgi' ) );
 	$add( 'contact_email', 'xgi_identity', __( 'Contact email', 'xgi' ), 'email', 'sanitize_email' );
 
 	$wp_customize->add_setting(
@@ -195,7 +197,7 @@ function xgi_customize_register( $wp_customize ) {
 	$wp_customize->add_setting(
 		'xgi_show_news',
 		array(
-			'default'           => false,
+			'default'           => true,
 			'sanitize_callback' => 'wp_validate_boolean',
 		)
 	);
@@ -203,7 +205,7 @@ function xgi_customize_register( $wp_customize ) {
 		'xgi_show_news',
 		array(
 			'label'       => __( 'Show the News section on the home page', 'xgi' ),
-			'description' => __( 'The original site hides News until final content is ready. Turning this on shows the four most recent posts.', 'xgi' ),
+			'description' => __( 'Shows the four most recent posts between Research and Upcoming Events. Turn off to hide the section while news content is being prepared.', 'xgi' ),
 			'section'     => 'xgi_news',
 			'type'        => 'checkbox',
 		)

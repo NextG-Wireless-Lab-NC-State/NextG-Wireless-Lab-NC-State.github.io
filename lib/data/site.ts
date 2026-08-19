@@ -42,36 +42,90 @@ export type NewsItem = {
   excerpt: string;
   date: string;
   placeholder: boolean;
+  image?: string; // path under /public
+  logo?: boolean; // show the whole mark on a light ground instead of cropping
 };
 
 export const news: NewsItem[] = [
   {
     id: 1,
-    headline: "News story 1 — headline placeholder",
-    excerpt: "Short excerpt placeholder. Replace with final xGI news content.",
-    date: "Date placeholder",
-    placeholder: true,
+    headline: "SkyShare accepted to ACM MobiCom 2026",
+    excerpt:
+      "SkyShare has been accepted to ACM MobiCom 2026.",
+    date: "",
+    placeholder: false,
+    image: "/news/acm.png",
+    logo: true,
   },
   {
     id: 2,
-    headline: "News story 2 — headline placeholder",
-    excerpt: "Short excerpt placeholder. Replace with final xGI news content.",
-    date: "Date placeholder",
-    placeholder: true,
+    headline: "SlotScope accepted to ACM WiNTECH 2026",
+    excerpt:
+      "SlotScope has been accepted to ACM WiNTECH 2026.",
+    date: "",
+    placeholder: false,
+    image: "/news/acm.png",
+    logo: true,
   },
   {
     id: 3,
-    headline: "News story 3 — headline placeholder",
-    excerpt: "Short excerpt placeholder. Replace with final xGI news content.",
-    date: "Date placeholder",
-    placeholder: true,
+    headline: "Two tutorials accepted to IEEE MILCOM 2026",
+    excerpt:
+      "Two tutorials — T1: “Autonomous AI/ML for AI-native 6G Networks” and T2: “NTN in 5G-Advanced and 6G” — have been accepted to IEEE MILCOM 2026. Each features hands-on demonstrations: NeuralSmith for T1 and SpaceNet for T2.",
+    date: "",
+    placeholder: false,
+    image: "/news/ieee-milcom.png",
+    logo: true,
   },
   {
     id: 4,
-    headline: "News story 4 — headline placeholder",
-    excerpt: "Short excerpt placeholder. Replace with final xGI news content.",
-    date: "Date placeholder",
-    placeholder: true,
+    headline: "CellSense accepted to IEEE MILCOM 2026",
+    excerpt:
+      "CellSense has been accepted to IEEE MILCOM 2026.",
+    date: "",
+    placeholder: false,
+    image: "/news/ieee-milcom.png",
+    logo: true,
+  },
+  {
+    id: 5,
+    headline: "TelcoAgent accepted to IEEE GLOBECOM 2026",
+    excerpt:
+      "TelcoAgent has been accepted to IEEE GLOBECOM 2026.",
+    date: "",
+    placeholder: false,
+    image: "/news/ieee-globecom.webp",
+    logo: true,
+  },
+  {
+    id: 6,
+    headline: "NSF VINES Track 1 award for the ARMANI project",
+    excerpt:
+      "Received an NSF VINES Track 1 award for ARMANI project, in collaboration with Yale University.",
+    date: "",
+    placeholder: false,
+    image: "/news/nsf.png",
+    logo: true,
+  },
+  {
+    id: 7,
+    headline: "CellSense qualifies for the MILCOM 2026 Young Scholar Workshop",
+    excerpt:
+      "CellSense has qualified for the Young Scholar Workshop (YSW) poster session.",
+    date: "",
+    placeholder: false,
+    image: "/news/ieee-milcom.png",
+    logo: true,
+  },
+  {
+    id: 8,
+    headline: "TelcoAgent featured in RCRWireless",
+    excerpt:
+      "TelcoAgent has been accepted to IEEE GLOBECOM 2026, and has featured in RCRWireless.",
+    date: "",
+    placeholder: false,
+    image: "/news/rcr-wireless.png",
+    logo: true,
   },
 ];
 
