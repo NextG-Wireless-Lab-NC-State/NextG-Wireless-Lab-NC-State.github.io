@@ -1,27 +1,24 @@
-# dependencies
-node_modules/
-.pnp
-.pnp.js
+# WordPress theme repository — no build step, nothing generated to ignore.
 
-# build output
-.next/
-out/
-build/
+# packaged theme zips
+*.zip
 
-# debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.pnpm-debug.log*
+# php tooling
+/vendor/
+composer.lock
+.phpunit.result.cache
 
-# environment
-.env*.local
+# local wordpress config / secrets
+wp-config.php
 .env
+.env*.local
 
 # editor
 .vscode/
 .idea/
-.DS_Store
+*.sublime-*
 
-# typescript
-*.tsbuildinfo
+# os
+.DS_Store
+Thumbs.db
+desktop.ini

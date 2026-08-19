@@ -17,7 +17,11 @@
 				<p class="site-footer__address">
 					<?php echo esc_html( xgi_option( 'university' ) ); ?> | <?php echo esc_html( xgi_option( 'initiative' ) ); ?>
 					<br>
-					<?php echo esc_html( xgi_option( 'department' ) ); ?>
+					<?php echo esc_html( xgi_option( 'department_footer' ) ); ?>
+					<?php if ( xgi_option( 'address' ) ) : ?>
+						<br>
+						<?php echo esc_html( xgi_option( 'address' ) ); ?>
+					<?php endif; ?>
 				</p>
 			</div>
 
@@ -65,7 +69,7 @@
 				);
 				?>
 			</span>
-			<span><?php echo esc_html( xgi_option( 'department' ) ); ?></span>
+			<span><?php echo esc_html( xgi_option( 'department_footer' ) ); ?></span>
 		</div>
 	</div>
 </footer>

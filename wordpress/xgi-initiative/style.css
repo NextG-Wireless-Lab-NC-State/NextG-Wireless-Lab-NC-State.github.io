@@ -1598,11 +1598,21 @@ button {
 	color: var(--gray-300);
 }
 
+/* Directors sit side by side from 640px up, each keeping the single-column card
+   width; below that they stack. */
 .leadership-list {
-	display: flex;
-	flex-direction: column;
+	display: grid;
+	grid-template-columns: 1fr;
 	gap: 1.25rem;
 	max-width: 20rem;
+}
+
+@media (min-width: 640px) {
+	.leadership-list {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		/* two 20rem cards plus the gap */
+		max-width: 41.25rem;
+	}
 }
 
 /* ==========================================================================
@@ -1894,6 +1904,20 @@ button {
 	object-fit: cover;
 }
 
+/* Logo marks (e.g. a conference logo on a news card) sit whole inside the slot
+   instead of being cropped to fill it. */
+.facility-card__media--logo {
+	object-fit: contain;
+	padding: 1.5rem;
+	background: var(--gray-50);
+	border-bottom: 1px solid var(--gray-200);
+}
+
+/* The card's image zoom would push a contained logo past its edges. */
+.card:hover .facility-card__media--logo {
+	transform: none;
+}
+
 .facility-card__title {
 	font-family: var(--font-display);
 	font-weight: 700;
@@ -1981,6 +2005,45 @@ button {
 	flex: 1 1 auto;
 	font-size: 0.875rem;
 	color: var(--gray-700);
+}
+
+/* Clamped to the two lines the short items occupy, so every card in the row is
+   the same height. Added by JS, so without scripts the full text still shows. */
+.news-card__excerpt--clamp {
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	line-clamp: 2;
+	overflow: hidden;
+}
+
+.news-card__excerpt--clamp.is-expanded {
+	display: block;
+	-webkit-line-clamp: none;
+	line-clamp: none;
+	overflow: visible;
+}
+
+.news-card__toggle {
+	align-self: flex-start;
+	margin-top: 0.5rem;
+	padding: 0;
+	font-family: var(--font-sans);
+	font-size: 0.75rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+	color: var(--wolfred);
+}
+
+.news-card__toggle:hover {
+	text-decoration: underline;
+}
+
+/* Holds the toggle's space on cards that did not need one, so the row stays
+   even. visibility:hidden also keeps it out of the tab order and a11y tree. */
+.news-card__toggle--placeholder {
+	visibility: hidden;
 }
 
 .note {
@@ -2122,6 +2185,119 @@ button {
 	border: 1px solid var(--gray-200);
 	font: inherit;
 	font-size: 0.9375rem;
+}
+
+/* ==========================================================================
+   15b. Comments (standard posts only)
+   ========================================================================== */
+
+.comments {
+	margin-top: 3.5rem;
+	padding-top: 2.5rem;
+	border-top: 1px solid var(--gray-200);
+}
+
+.comment-list {
+	list-style: none;
+	margin: 0 0 2.5rem;
+}
+
+.comment-list ol {
+	list-style: none;
+	margin-left: 1.5rem;
+}
+
+.comment-list li {
+	margin-bottom: 1.5rem;
+}
+
+.comment-body {
+	padding: 1.25rem;
+	border: 1px solid var(--gray-200);
+	border-radius: var(--radius);
+	font-size: 0.9375rem;
+}
+
+.comment-author {
+	font-weight: 600;
+}
+
+.comment-author img {
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 0.5rem;
+	border-radius: 50%;
+}
+
+.comment-metadata {
+	margin-top: 0.25rem;
+	font-size: 0.75rem;
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+	color: var(--gray-500);
+}
+
+.comment-content {
+	margin-top: 0.75rem;
+}
+
+.comment-content > * + * {
+	margin-top: 0.75rem;
+}
+
+.reply {
+	margin-top: 0.75rem;
+	font-family: var(--font-sans);
+	font-size: 0.75rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+}
+
+.reply a {
+	color: var(--wolfred);
+}
+
+.comments__closed {
+	margin-bottom: 2rem;
+	font-size: 0.875rem;
+	color: var(--gray-500);
+}
+
+.comment-form p {
+	margin-bottom: 1rem;
+}
+
+.comment-form label {
+	display: block;
+	margin-bottom: 0.25rem;
+	font-family: var(--font-sans);
+	font-size: 0.8125rem;
+	font-weight: 600;
+}
+
+.comment-form input[type="text"],
+.comment-form input[type="email"],
+.comment-form input[type="url"],
+.comment-form textarea {
+	width: 100%;
+	max-width: 34rem;
+	padding: 0.75rem 1rem;
+	border: 1px solid var(--gray-200);
+	font: inherit;
+	font-size: 0.9375rem;
+}
+
+.comment-form textarea {
+	max-width: 44rem;
+	min-height: 9rem;
+}
+
+.comment-notes,
+.comment-form-cookies-consent label {
+	font-size: 0.8125rem;
+	font-weight: 400;
+	color: var(--gray-500);
 }
 
 /* ==========================================================================

@@ -146,7 +146,8 @@ if ( xgi_option( 'show_news' ) ) :
 		<div class="grid grid--4">
 			<?php foreach ( $xgi_news as $i => $xgi_post ) : ?>
 				<div class="reveal" style="transition-delay:<?php echo (int) ( $i * 70 ); ?>ms">
-					<?php xgi_news_card( $xgi_post ); ?>
+					<?php // Clamped here so one long item does not tower over the rest of the row. ?>
+					<?php xgi_news_card( $xgi_post, 'h3', true ); ?>
 				</div>
 			<?php endforeach; ?>
 		</div>

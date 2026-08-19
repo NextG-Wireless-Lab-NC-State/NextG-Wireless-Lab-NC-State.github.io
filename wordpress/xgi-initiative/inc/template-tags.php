@@ -16,23 +16,26 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 function xgi_defaults() {
 	return array(
-		'google_fonts'     => true,
-		'contact_email'    => 'xgi-contact@ncsu.edu',
-		'university'       => 'NC State University',
-		'initiative'       => 'xGI Initiative',
-		'department'       => 'Department of Electrical and Computer Engineering (ECE)',
-		'hero_eyebrow'     => 'NC State University · Intelligent Wireless',
-		'hero_title_start' => 'The Future of',
-		'hero_title_glow'  => 'Intelligent',
-		'hero_title_end'   => 'Wireless Networked Systems',
-		'hero_lede'        => 'xGI brings together communications, AI, sensing, hardware, and autonomous systems to build the technologies that define the FutureG era.',
-		'hero_stat_number' => '5',
-		'hero_stat_label'  => 'Research Areas',
-		'mission'          => 'The xGI Initiative at NC State advances the future of intelligent wireless networked systems through interdisciplinary research spanning communications, networking, AI, sensing, hardware, and autonomous applications. By integrating innovations across the wireless stack — from RF platforms and O-RAN architectures to AI-native networks and large-scale testbeds — xGI develops transformative technologies for next-generation communication, sensing, and connected systems. Through strong partnerships with industry and government, xGI accelerates innovation and real-world impact while positioning NC State as a national leader in next-generation technologies.',
-		'vision'           => 'xGI envisions a future where communications, sensing, and intelligence are deeply integrated into a unified wireless fabric.',
-		'research_intro'   => 'The convergence of AI, communications, and sensing is reshaping wireless networked systems. xGI leads this transformation through research spanning AI-native networks, integrated sensing and communications, intelligent infrastructure, and autonomous applications.',
-		'research_pitch'   => 'xGI is the convergence of AI, communications, sensing, and autonomous systems for the FutureG era.',
-		'show_news'        => false,
+		'google_fonts'      => true,
+		'contact_email'     => 'xgi-contact@ncsu.edu',
+		'university'        => 'NC State University',
+		'initiative'        => 'xGI Initiative',
+		'department'        => 'Department of Electrical and Computer Engineering (ECE)',
+		// The footer spells the department out without the acronym.
+		'department_footer' => 'Department of Electrical and Computer Engineering',
+		'address'           => '909 Capability Dr, Raleigh, NC 27606',
+		'hero_eyebrow'      => 'NC State University · Intelligent Wireless',
+		'hero_title_start'  => 'The Future of',
+		'hero_title_glow'   => 'Intelligent',
+		'hero_title_end'    => 'Wireless Networked Systems',
+		'hero_lede'         => 'xGI brings together communications, AI, sensing, hardware, and autonomous systems to build the technologies that define the FutureG era.',
+		'hero_stat_number'  => '5',
+		'hero_stat_label'   => 'Research Areas',
+		'mission'           => 'The xGI Initiative at NC State advances the future of intelligent wireless networked systems through interdisciplinary research spanning communications, networking, AI, sensing, hardware, and autonomous applications. By integrating innovations across the wireless stack — from RF platforms and O-RAN architectures to AI-native networks and large-scale testbeds — xGI develops transformative technologies for next-generation communication, sensing, and connected systems. Through strong partnerships with industry and government, xGI accelerates innovation and real-world impact while positioning NC State as a national leader in next-generation technologies.',
+		'vision'            => 'xGI envisions a future where communications, sensing, and intelligence are deeply integrated into a unified wireless fabric.',
+		'research_intro'    => 'The convergence of AI, communications, and sensing is reshaping wireless networked systems. xGI leads this transformation through research spanning AI-native networks, integrated sensing and communications, intelligent infrastructure, and autonomous applications.',
+		'research_pitch'    => 'xGI is the convergence of AI, communications, sensing, and autonomous systems for the FutureG era.',
+		'show_news'         => true,
 	);
 }
 
@@ -523,18 +526,24 @@ function xgi_event_card( $event, $variant = 'full' ) {
  * @param WP_Post $post     Post object.
  * @param string  $heading  Heading tag to use.
  */
-function xgi_news_card( $post, $heading = 'h3' ) {
-	$label = get_post_meta( $post->ID, 'xgi_date_label', true );
-	$tag   = in_array( $heading, array( 'h2', 'h3' ), true ) ? $heading : 'h3';
+function xgi_news_card( $post, $heading = 'h3', $clamp = false ) {
+	$label      = get_post_meta( $post->ID, 'xgi_date_label', true );
+	$tag        = in_array( $heading, array( 'h2', 'h3' ), true ) ? $heading : 'h3';
+	$excerpt_id = 'news-excerpt-' . $post->ID;
 	?>
-	<article class="card">
+	<article class="card"<?php echo $clamp ? ' data-xgi-clamp' : ''; ?>>
 		<?php if ( has_post_thumbnail( $post ) ) : ?>
 			<?php
+			// Logos are shown whole on a plain ground; photos fill the 16:9 slot.
+			// A logo also needs the uncropped file, since the xgi-wide crop would
+			// slice the top and bottom off a square mark.
+			$is_logo = (bool) get_post_meta( $post->ID, 'xgi_logo', true );
+
 			echo get_the_post_thumbnail(
 				$post,
-				'xgi-wide',
+				$is_logo ? 'full' : 'xgi-wide',
 				array(
-					'class'   => 'facility-card__media',
+					'class'   => 'facility-card__media' . ( $is_logo ? ' facility-card__media--logo' : '' ),
 					'loading' => 'lazy',
 				)
 			);
@@ -543,12 +552,17 @@ function xgi_news_card( $post, $heading = 'h3' ) {
 			<?php xgi_image_placeholder( __( 'News image', 'xgi' ), 'facility-card__media' ); ?>
 		<?php endif; ?>
 		<div class="card__body">
-			<span class="news-card__date"><?php echo esc_html( $label ? $label : get_the_date( '', $post ) ); ?></span>
+			<?php if ( $label ) : ?>
+				<span class="news-card__date"><?php echo esc_html( $label ); ?></span>
+			<?php endif; ?>
 			<<?php echo esc_html( $tag ); ?> class="news-card__title"><?php echo esc_html( get_the_title( $post ) ); ?></<?php echo esc_html( $tag ); ?>>
-			<p class="news-card__excerpt"><?php echo esc_html( get_the_excerpt( $post ) ); ?></p>
-			<a href="<?php echo esc_url( get_permalink( $post ) ); ?>" class="link-red link-red--xs" style="margin-top:1rem">
-				<?php esc_html_e( 'Read more', 'xgi' ); ?><?php echo xgi_arrow(); // phpcs:ignore WordPress.Security.EscapeOutput ?>
-			</a>
+			<p class="news-card__excerpt" id="<?php echo esc_attr( $excerpt_id ); ?>"><?php echo esc_html( get_the_excerpt( $post ) ); ?></p>
+			<?php if ( $clamp ) : ?>
+				<?php // Revealed by JS only when the excerpt actually overflows, so the full text still shows without scripts. ?>
+				<button type="button" class="news-card__toggle" aria-expanded="false" aria-controls="<?php echo esc_attr( $excerpt_id ); ?>" hidden>
+					<?php esc_html_e( 'Show more', 'xgi' ); ?>
+				</button>
+			<?php endif; ?>
 		</div>
 	</article>
 	<?php

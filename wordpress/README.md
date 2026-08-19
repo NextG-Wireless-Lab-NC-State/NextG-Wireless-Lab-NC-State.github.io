@@ -1,8 +1,8 @@
 # xGI Initiative — WordPress theme
 
-A WordPress recreation of <https://nextg-wireless-lab-nc-state.github.io/> (the Next.js/React site in
-the repository root). Same pages, same content, same NC State identity — rebuilt as a standard
-WordPress theme with no page builder, no framework and no third-party plugins.
+The theme that runs the xGI Initiative site. Same pages, same content, same NC State identity as the
+original static site it replaces — rebuilt as a standard WordPress theme with no page builder, no
+framework and no third-party plugins.
 
 ```
 wordpress/
@@ -39,13 +39,13 @@ updated in place rather than duplicated.
 | Publications | 135, 15 of them award-winning |
 | Facilities | 4, with photos |
 | Events | 1 upcoming |
-| News | 4 placeholder posts (published but unlinked, as on the original) |
-| Menus | Primary + Footer, built and assigned to their theme locations |
+| News | 8 posts, linked from the menus and the home page section |
+| Menus | Primary (8 items) + Footer (6 items), built and assigned to their theme locations |
 
 ## Editing the site
 
-Everything that was hard-coded in the original's TypeScript data files is now ordinary WordPress
-content:
+Everything the original site hard-coded in source files is now ordinary WordPress content, editable
+from wp-admin:
 
 - **Research Areas** — overview is the editor content, area number is *Order* under Page
   Attributes, keywords / affiliated faculty / highlighted publications are fields below the editor.
@@ -63,10 +63,15 @@ content:
   behind the date block is the Featured Image.
 - **Facilities** — description is the editor content, plus an optional external URL that makes the
   whole card a link.
-- **Standing copy** — **Appearance → Customize → xGI Initiative**: identity and contact email, the
-  home hero (eyebrow, three-part headline, intro, stat chip, five carousel slides), mission, vision,
-  research intro and positioning statement, and a switch to show the News section on the home page
-  (off by default, matching the original).
+- **News** — ordinary WordPress posts, listed newest first by publish date. The excerpt is what the
+  cards show, and the card image is the Featured Image. Under *News Details*: a free text *Date
+  label*, hidden when empty so items without one show no date, and *The image is a logo*, which
+  shows the whole image on a light ground instead of cropping it to fill the card.
+- **Standing copy** — **Appearance → Customize → xGI Initiative**: identity, street address and
+  contact email, the home hero (eyebrow, three-part headline, intro, stat chip, five carousel
+  slides), mission, vision, research intro and positioning statement, and a switch for the home page
+  News section (on by default). The department line has separate header and footer fields — the
+  header carries the *(ECE)* acronym, the footer spells it out.
 
 ## Structure
 
@@ -78,7 +83,7 @@ xgi-initiative/
 ├── front-page.php             Home: hero, mission, vision, research, news, events, CTAs
 ├── single-xgi_area.php        A research area
 ├── page-templates/            Research, Publications, People, Facilities, Events, Affiliates, News
-├── page.php single.php index.php 404.php searchform.php
+├── page.php single.php index.php 404.php searchform.php comments.php
 ├── inc/
 │   ├── post-types.php         CPTs, custom fields, meta boxes, admin columns
 │   ├── template-tags.php      Options, queries, cards, page hero
@@ -88,7 +93,7 @@ xgi-initiative/
 └── assets/
     ├── js/xgi.js              Header shadow, mobile nav, hero carousel, reveals, publication filter
     ├── css/editor.css         Block-editor styles
-    └── images/                Faculty portraits, facilities, hero slides, event image
+    └── images/                Faculty portraits, facilities, hero slides, event and news images
 ```
 
 ## Notes
@@ -98,9 +103,9 @@ xgi-initiative/
   (640 / 768 / 1024 / 1280 px).
 - **Fonts** load from Google Fonts. Turn that off in the Customizer if you self-host them or need to
   avoid the external request; the stack falls back to Georgia / system sans.
-- **JavaScript** is ~250 lines of vanilla JS with no dependencies, and every feature degrades
-  gracefully: without it the nav, carousel and full publication list still render. `prefers-reduced-motion`
-  is respected throughout.
+- **JavaScript** is ~300 lines of vanilla JS with no dependencies, and every feature degrades
+  gracefully: without it the nav, carousel, full publication list and complete news excerpts still
+  render. `prefers-reduced-motion` is respected throughout.
 - **Requirements.** WordPress 6.0+, PHP 7.4+. No plugins required.
 
 ## Verified
